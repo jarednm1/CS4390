@@ -1,12 +1,14 @@
 from socket import *
 import sys
 
+#http://127.0.0.1:1000/www.neverssl.com     for testing
+
+# this is from template but seems pointless, will remove in final version
 #if len(sys.argv) <= 1:
 #    print('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
 #    sys.exit(2)
 
 # Create a server socket, bind it to a port and start listening
-
 # Fill in start.
 tcpSerSock = socket(AF_INET, SOCK_STREAM)
 port = 1000
@@ -23,13 +25,12 @@ while 1:
     # Fill in start. # Fill in end.
     print(message)
     # Extract the filename from the given message
-    print(message.split()[1])
     filename = message.split()[1].partition("/")[2]
     print(filename)
     fileExist = "false"
     filetouse = "/" + filename
     print(filetouse)
-    
+
     try:
         # Check wether the file exist in the cache
         f = open(filetouse[1:], "r")
@@ -39,7 +40,7 @@ while 1:
         tcpCliSock.send("HTTP/1.0 200 OK\r\n")
         tcpCliSock.send("Content-Type:text/html\r\n")
         # Fill in start.
-        created_response = " "
+        created_response = ""
 
         #for every element in output data, add it to the response
         for element in outputdata:
