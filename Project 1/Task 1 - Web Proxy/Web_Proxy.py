@@ -1,9 +1,9 @@
 from socket import *
 import sys
 
-if len(sys.argv) <= 1:
-    print('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
-    sys.exit(2)
+#if len(sys.argv) <= 1:
+#    print('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
+#    sys.exit(2)
 
 # Create a server socket, bind it to a port and start listening
 
@@ -11,7 +11,7 @@ if len(sys.argv) <= 1:
 tcpSerSock = socket(AF_INET, SOCK_STREAM)
 port = 1000
 host = '127.0.0.1'
-tcpSerSock.bind(host, port)
+tcpSerSock.bind((host, port))
 tcpSerSock.listen(1)
 # Fill in end.
 while 1:
@@ -29,6 +29,7 @@ while 1:
     fileExist = "false"
     filetouse = "/" + filename
     print(filetouse)
+    
     try:
         # Check wether the file exist in the cache
         f = open(filetouse[1:], "r")
