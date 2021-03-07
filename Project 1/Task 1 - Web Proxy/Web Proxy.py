@@ -64,13 +64,18 @@ except IOError:
             fileobj.write("GET "+"http://" + filename + "HTTP/1.0\n\n")
             # Read the response into buffer
             # Fill in start.
-            c.send(fileobj)
-
+            temp_buffer = fileobj.readlines()
             # Fill in end.
             # Create a new file in the cache for the requested file.
             # Also send the response in the buffer to client socket and the corresponding file in the cache
             tmpFile = open("./" + filename,"wb")
             # Fill in start.
+            length = len(temp_buffer)
+            for item in range(0, length)
+            {
+                tmpFile.write(temp_buffer[item])
+                tcpCliSock.send(temp_buffer[item])
+            }
             # Fill in end.
         except:
             print("Illegal request")
