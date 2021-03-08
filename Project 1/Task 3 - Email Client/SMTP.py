@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-# python SMTP.py CS4390JJIS@gmail.com smtp.gmail.com
-# eminemforthewin
+# python SMTP.py @gmail.com smtp.gmail.com
+# pass
 import argparse
 import getpass
 import certifi
