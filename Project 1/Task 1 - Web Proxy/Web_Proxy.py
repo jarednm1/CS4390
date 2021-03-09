@@ -24,6 +24,7 @@ while 1:
     print('Received a connection from:', addr)
     message = tcpCliSock.recv(4096)
     print(message)
+
     # Extract the filename from the given message
     filename = message.split()[1].partition("/".encode())[2]
     print(filename)
@@ -32,7 +33,7 @@ while 1:
     print(filetouse)
 
     try:
-        # Check wether the file exist in the cache
+        # Check whether the file exist in the cache
         f = open(filetouse[1:], "r")
         outputdata = f.readlines()
         fileExist = "true"
