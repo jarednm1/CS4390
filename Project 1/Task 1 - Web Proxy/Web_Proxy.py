@@ -21,6 +21,7 @@ while 1:
     # Start receiving data from the client
     print('Ready to serve...')
     tcpCliSock, addr = tcpSerSock.accept()
+    
     print('Received a connection from:', addr)
     message = tcpCliSock.recv(4096)
     print(message)
@@ -86,7 +87,6 @@ while 1:
                     tcpCliSock.send(temp_buffer[item])
                 # Fill in end.
             except:
-                print("dumbass idiot boy")
                 print("Illegal request")
         else:
         # HTTP response message for file not found
