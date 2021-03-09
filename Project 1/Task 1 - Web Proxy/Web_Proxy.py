@@ -69,7 +69,7 @@ while 1:
                 # Fill in end.
                 # Create a temporary file on this socket and ask port 80 for the file requested by the client
                 fileobj = c.makefile('r', 0)
-                fileobj.write("GET "+"http://" + filename + "HTTP/1.0\n\n")
+                fileobj.write(("GET "+"http://" + filename.decode() + "HTTP/1.0\n\n").encode())
                 # Read the response into buffer
                 # Fill in start.
                 temp_buffer = fileobj.readlines()
@@ -79,7 +79,7 @@ while 1:
                 tmpFile = open("./" + filename,"wb")
                 # Fill in start.
                 length = len(temp_buffer)
-                
+
                 for item in range(0, length):
                     tmpFile.write(temp_buffer[item])
                     tcpCliSock.send(temp_buffer[item])
