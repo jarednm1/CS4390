@@ -1,5 +1,6 @@
 from socket import *
 import sys
+import os
 
 #http://127.0.0.1:1000/www.neverssl.com     for testing
 
@@ -22,13 +23,12 @@ while 1:
     tcpCliSock, addr = tcpSerSock.accept()
     print('Received a connection from:', addr)
     message = tcpCliSock.recv(4096)
-    # Fill in start. # Fill in end.
     print(message)
     # Extract the filename from the given message
-    filename = message.split()[1].partition("/")[2]
+    filename = message.split()[1].partition("/".encode())[2]
     print(filename)
     fileExist = "false"
-    filetouse = "/" + filename
+    filetouse = os.path.join(sys.path[0], filename.decode())#"/" + filename
     print(filetouse)
 
     try:
@@ -36,9 +36,11 @@ while 1:
         f = open(filetouse[1:], "r")
         outputdata = f.readlines()
         fileExist = "true"
+        print('File Exists') # remove after testing
+
         # ProxyServer finds a cache hit and generates a response message
-        tcpCliSock.send("HTTP/1.0 200 OK\r\n")
-        tcpCliSock.send("Content-Type:text/html\r\n")
+        tcpCliSock.send("HTTP/1.0 200 OK\r\n".encode())
+        tcpCliSock.send("Content-Type:text/html\r\n".encode())
         # Fill in start.
         created_response = ""
 
@@ -47,19 +49,23 @@ while 1:
             created_response += element
         
         # Fill in end.
+        tcpCliSock.send(created_response.encode())
         print('Read from cache')
-        # Error handling for file not found in cache
+
+    # Error handling for file not found in cache
     except IOError:
+
         if fileExist == "false":
             # Create a socket on the proxy server
             # Terrible naming convention but its the template soooo??
             c = socket(AF_INET, SOCK_STREAM)
-            hostn = filename.replace("www.","",1)
-            print(hostn)
+            hostn = (filename.replace("www.".encode(), "".encode(), 1)).decode()
+            #print(hostn) for testing
+
             try:
                 # Connect to the socket to port 80
                 # Fill in start.
-                c.connect(host, 80)
+                c.connect((host, 80))
                 # Fill in end.
                 # Create a temporary file on this socket and ask port 80 for the file requested by the client
                 fileobj = c.makefile('r', 0)
@@ -73,6 +79,7 @@ while 1:
                 tmpFile = open("./" + filename,"wb")
                 # Fill in start.
                 length = len(temp_buffer)
+                
                 for item in range(0, length):
                     tmpFile.write(temp_buffer[item])
                     tcpCliSock.send(temp_buffer[item])
