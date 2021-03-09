@@ -11,9 +11,9 @@ import os
 
 # Create a server socket, bind it to a port and start listening
 # Fill in start.
-tcpSerSock = socket(AF_INET, SOCK_STREAM)
 port = 1000
 host = '127.0.0.1'
+tcpSerSock = socket(AF_INET, SOCK_STREAM)
 tcpSerSock.bind((host, port))
 tcpSerSock.listen(1)
 # Fill in end.
@@ -86,6 +86,7 @@ while 1:
                     tcpCliSock.send(temp_buffer[item])
                 # Fill in end.
             except:
+                print("dumbass idiot boy")
                 print("Illegal request")
         else:
         # HTTP response message for file not found
