@@ -4,11 +4,6 @@ import os
 
 #http://127.0.0.1:1000/www.neverssl.com     for testing
 
-# this is from template but seems pointless, will remove in final version
-#if len(sys.argv) <= 1:
-#    print('Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server')
-#    sys.exit(2)
-
 # Create a server socket, bind it to a port and start listening
 # Fill in start.
 port = 1000
@@ -59,7 +54,7 @@ while 1:
 
         if fileExist == "false":
             # Create a socket on the proxy server
-            # Terrible naming convention but its the template soooo??
+            # Terrible naming convention but its the template soooo?
             c = socket(AF_INET, SOCK_STREAM)
             hostn = (filename.replace("www.".encode(), "".encode(), 1)).decode()
             #print(hostn) for testing
