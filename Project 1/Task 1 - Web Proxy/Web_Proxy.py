@@ -67,7 +67,7 @@ while 1:
                 # Create a temporary file on this socket and ask port 80 for the file requested by the client
                 #fileobj = c.makefile('r', 0)
                 #fileobj.write(("GET "+"http://" + filename.decode() + "HTTP/1.0\n\n").encode())
-                created_request = ("GET "+"http://" + filename.decode() + "HTTP/1.0\n\n")
+                created_request = ("GET "+"http://" + filename.decode() + "HTTP/1.0\n\n").encode()
                 c.send(created_request)
                 temp_response = c.recv(4096)
                 created_response = ""
