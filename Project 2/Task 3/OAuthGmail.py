@@ -12,8 +12,8 @@ import base64
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
 #Added For Readability
-TokenLocation = 'F:\CS4390\CS4390\Project 2\Task 3\token.json'
-CredentialsLocation = 'F:\CS4390\CS4390\Project 2\Task 3\credentials.json'
+TokenLocation = '/CS4390/CS4390/Project 2/Task 3/token.json'
+CredentialsLocation = '/CS4390/CS4390/Project 2/Task 3/credentials.json'
 
 def main():
     """Shows basic usage of the Gmail API.
