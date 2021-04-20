@@ -12,35 +12,35 @@ import base64
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
 #Added For Readability
-TokenLocation = '/CS4390/CS4390/Project 2/Task 3/token.json'
-CredentialsLocation = '/CS4390/CS4390/Project 2/Task 3/credentials.json'
+TokenPath = '/CS4390/CS4390/Project 2/Task 3/token.json'
+CredentialsPath = '/CS4390/CS4390/Project 2/Task 3/credentials.json'
 
 def main():
-    """Shows basic usage of the Gmail API.
+    """
+    Shows basic usage of the Gmail API.
     Lists the user's Gmail labels.
     """
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists(TokenLocation):
+    if os.path.exists(TokenPath):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(CredentialsLocation, SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(CredentialsPath, SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open(TokenLocation, 'w') as token:
+        with open(TokenPath, 'w') as token:
             token.write(creds.to_json())
 
     service = build('gmail', 'v1', credentials=creds)
 
 # Call the Gmail API
-    
-    emailMsg = 'Testing Gmail OAUTH - version 2 of the code'
+    emailMsg = 'This email confirms the completion of Task 3 of Project 2.'
     mimeMessage = MIMEMultipart()
 
 # <email addr here> should be replaced with ‘user@somewhere’ 
@@ -51,7 +51,6 @@ def main():
 
     message = service.users().messages().send(userId='me', body={'raw': raw_string}).execute()
     print(message)
-    
 
 if __name__ == '__main__':
     main()
